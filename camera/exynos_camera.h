@@ -312,6 +312,7 @@ struct exynos_camera {
 
 	int capture_enabled;
 	struct exynos_camera_capture_listener *capture_listeners;
+	struct exynos_exif exif;
 	camera_memory_t *capture_memory;
 	int capture_memory_address;
 	int capture_memory_index;
@@ -429,6 +430,9 @@ struct exynos_camera {
 	int iso;
 	int metering;
 	int image_stabilization;
+	char raw_focus_areas[PAGE_SIZE];
+	char raw_focus_mode[64];
+	char raw_flash_mode[64];
 };
 
 struct exynos_camera_addrs {
@@ -513,6 +517,7 @@ void exynos_camera_auto_focus_thread_stop(struct exynos_camera *exynos_camera);
  */
 
 int exynos_exif_start(struct exynos_camera *exynos_camera, struct exynos_exif *exif);
+int exynos_exif_create(struct exynos_camera *exynos_camera, struct exynos_exif *exif);
 void exynos_exif_stop(struct exynos_camera *exynos_camera,
 	struct exynos_exif *exif);
 int exynos_exif(struct exynos_camera *exynos_camera, struct exynos_exif *exif);
